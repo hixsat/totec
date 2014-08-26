@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+/*
+	ベースカラーを元にリンクカラーを自動指定。
+*/
+@mixin linkColor ($color: #0000ff, $light: 20%, $dark: 10%) {
+	&:link {
+		color: $color;
+	}
+	&:visited {
+		color: darken($color, $dark);
+	}
+	&:hover, &:active, &:focus {
+		color: lighten($color, $light);
+	}
+}

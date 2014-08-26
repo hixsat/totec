@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+/*
+	配置方法と上下左右の位置を一括指定。
+*/
+@mixin setPosition ($pos: absolute, $top: auto, $right: auto, $bottom: auto, $left: auto) {
+	position: $pos;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+}

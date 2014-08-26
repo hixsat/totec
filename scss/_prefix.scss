@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+/*
+	ベンダープレフィックスを自動付与。
+*/
+$prefixList: -webkit-, -moz-, "";
+/* -webkit-, -moz-, -ms-, -o-, "" */
+
+@mixin setPrefix ($prop, $value) {
+	@each $prefix in $prefixList {
+		#{$prefix}#{$prop}: $value;
+	}
+}

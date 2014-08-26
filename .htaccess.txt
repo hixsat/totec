@@ -1,0 +1,57 @@
+RewriteEngine on
+RewriteCond %{HTTP:Accept-Encoding} gzip
+RewriteCond %{REQUEST_FILENAME}\.gz -s
+RewriteRule .+ %{REQUEST_URI}.gz
+
+<FilesMatch "\.txt\.gz$">
+	ForceType   text/plain
+	AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.html?\.gz$">
+	ForceType   text/html
+	AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.(xml|rdf)\.gz$">
+	ForceType   text/xml
+	AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.css\.gz$">
+	ForceType   text/css
+	AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.js\.gz$">
+	ForceType   application/x-javascript
+	AddEncoding x-gzip .gz
+</FilesMatch>
+
+<FilesMatch "\.ico\.gz$">
+	ForceType   image/x-icon
+	AddEncoding x-gzip .gz
+</FilesMatch>
+
+Header set Vary User-Agent
+Header set Vary Accept-Language,Cookie
+Header set Vary Accept-Encoding,Cookie
+
+<ifModule mod_expires.c>
+	ExpiresActive On
+	ExpiresDefault "access plus 30 minutes"
+	ExpiresByType text/html "access plus 10 seconds"
+	ExpiresByType image/jpg "access plus 7 days"
+	ExpiresByType image/jpeg "access plus 7 days"
+	ExpiresByType image/gif "access plus 7 days"
+	ExpiresByType image/png "access plus 7 days"
+	ExpiresByType text/css "access plus 1 month"
+	ExpiresByType application/pdf "access plus 1 month"
+	ExpiresByType text/x-javascript "access plus 1 month"
+	ExpiresByType application/javascript "access plus 1 month"
+	ExpiresByType application/x-javascript "access plus 1 month"
+	ExpiresByType application/x-shockwave-flash "access plus 1 month"
+	ExpiresByType image/x-icon "access plus 1 month"
+</ifModule>
+
+AddType “text/html; charset=utf-8″ .html

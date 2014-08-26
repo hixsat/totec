@@ -1,0 +1,131 @@
+@charset "utf-8";
+@import "_extend.scss";
+@import "_font.scss";
+@import "_link.scss";
+@import "_prefix.scss";
+@import "_position.scss";
+
+$contentsWidth: 960px;				//コンテンツの横幅
+$imgPath: "../img/";				//画像のベースパス
+
+html {
+	//ベースフォントサイズを10px相当にする
+	font-size: 62.5%;
+} 
+body {
+	color: #303030;
+	background-color: #c0c0c0;
+	font-family:	arial, helvetica, clean,
+					'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro',
+					'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+}
+a {
+	@include linkColor(#00c0ff);
+}
+
+
+.wrapper {
+	width: $contentsWidth;
+	margin: 20px auto;
+	background-color: #ffffff;
+	@include setPrefix(border-radius, 5px);
+	@include setPrefix(box-shadow, rgba(0, 0, 0, 0.5) 0px 0px 10px 1px);
+	@include fontSize(1.4);
+}
+
+
+.header {
+	@extend %clearfix;
+	height: 60px;
+	padding-top: 20px;
+	
+	&:after {
+		content: "";
+		background: #b0e0c0;
+		display: block;
+		height: 40px;
+	}
+	
+	h1 {
+		float: left;
+		line-height: 0px;
+		margin-left: 20px;
+	}
+	
+	.menu_tab {
+		@extend %clearfix;
+		float: right;
+		margin-right: 20px;
+		
+		li {float: left;}
+		li, li a {
+			@extend %hidetext;
+			width: 160px;
+			height: 60px;
+			background: url(#{$imgPath}ui_menu_tab.png);
+			opacity: 1;
+			transition: opacity 0.2s;
+		}
+		
+		@for $i from 0 to 4 {
+			li:nth-child(#{$i + 1}) {background-position: $i * -160px -60px;}
+			li:nth-child(#{$i + 1}):active {background-position: $i * -160px -120px;}
+			li:nth-child(#{$i + 1}) a {background-position: $i * -160px 0px;}
+			#page#{$i + 1} & li:nth-child(#{$i + 1}) a {background-position: $i * -160px -180px; opacity: 1;}
+		}
+		li a:hover {opacity: 0;}
+	}
+}
+
+
+.body {
+	@extend %clearfix;
+	padding: 60px 20px 20px;
+	
+	.menu_side {
+		float: left;
+		width: 30%;
+		
+		li, li a {
+			@extend %hidetext;
+			width: 240px;
+			height: 40px;
+			margin-bottom: 10px;
+			background: url(#{$imgPath}ui_menu_side.png);
+			opacity: 1;
+			position: relative;
+			top: 0px;
+			left: 0px;
+			transition: opacity 0.2s, margin 0.1s, top 0.1s, left 0.1s;
+		}
+		
+		@for $i from 0 to 5 {
+			li:nth-child(#{$i + 1}) {background-position: -240px $i * -40px;}
+			li:nth-child(#{$i + 1}) a {background-position: 0px $i * -40px;}
+		}
+		li:hover {left: 10px;}
+		li:active {top: 2px;}
+		li a:hover {opacity: 0;}
+	}
+	
+	.contents {
+		float: right;
+		width: 70%;
+		white-space: normal;
+		
+		h2 {
+			@include fontSize(3);
+			border-bottom: 1px solid #c0c0c0;
+			margin-bottom: 20px;
+		}
+	}
+}
+
+
+.footer p {
+	width: $contentsWidth - 40px;
+	margin: auto;
+	padding: 20px 0px;
+	border-top: 1px solid #c0c0c0;
+	text-align: center;
+}

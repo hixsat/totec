@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+/*
+	@extendで使用する基本クラス
+*/
+%clearfix {
+	zoom: 1;
+	&:after {
+		display: block;
+		content: "";
+		clear: both;
+	}
+}
+%hidetext {
+	display: block;
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+}
